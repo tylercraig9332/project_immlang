@@ -1,15 +1,13 @@
-import { provider } from './api'
 import { Client, Account } from "appwrite";
-const accountProvider = () => { return new Account(provider()) }
 
 const client = new Client();
 
 const account = new Account(client);
 
+//TODO: env not working here, need to figure that out
 client
   .setEndpoint("http://localhost/v1")
   .setProject("631f864368a7fe90d698");
-
 
 const createAccount = async (email: string, password: string) => {
   return await account.create(

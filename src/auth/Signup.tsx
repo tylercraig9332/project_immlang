@@ -11,12 +11,12 @@ const Signup: NextPage = () => {
   const userRef = useRef<HTMLInputElement>(null);
   const pwRef = useRef<HTMLInputElement>(null);
   const pwConfRef = useRef<HTMLInputElement>(null);
+  const [errorMessage, setErrorMessage] = useState<string>(``);
+  const router = useRouter();
 
   const { isLoggedIn } = useAppStore((state) => ({
     isLoggedIn: state.isLoggedIn,
   }));
-  const [errorMessage, setErrorMessage] = useState<string>(``);
-  const router = useRouter();
 
   useEffect(() => {
     if (isLoggedIn) {

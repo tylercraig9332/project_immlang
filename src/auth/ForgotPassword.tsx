@@ -7,12 +7,13 @@ import { useRouter } from "next/router";
 
 const ForgotPassword: NextPage = () => {
   const userRef = useRef<HTMLInputElement>(null);
+  const router = useRouter();
+
   const { user, userObject, isLoggedIn } = useAppStore((state) => ({
     user: state.user,
     userObject: state.userObject,
     isLoggedIn: state.isLoggedIn,
   }));
-  const router = useRouter();
 
   useEffect(() => {
     if (isLoggedIn) {
