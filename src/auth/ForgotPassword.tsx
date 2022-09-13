@@ -1,18 +1,18 @@
 import type { NextPage } from "next";
 import React, { useEffect, useRef } from "react";
 import AuthCard from "./components/AuthCard";
+import { createAccountRecovery } from "api";
 import useAppStore from "store/appStore";
 import { useRouter } from "next/router";
-import { useTokenContext } from "api/AuthProvider";
 
-const Login: NextPage = () => {
+const ForgotPassword: NextPage = () => {
   const userRef = useRef<HTMLInputElement>(null);
-  const pwRef = useRef<HTMLInputElement>(null);
-  const router = useRouter();
-  const { login } = useTokenContext();
-  const { isLoggedIn } = useAppStore((state) => ({
+  const { user, userObject, isLoggedIn } = useAppStore((state) => ({
+    user: state.user,
+    userObject: state.userObject,
     isLoggedIn: state.isLoggedIn,
   }));
+  const router = useRouter();
 
   useEffect(() => {
     if (isLoggedIn) {
@@ -22,20 +22,16 @@ const Login: NextPage = () => {
     }
   }, [isLoggedIn]);
 
-  const handleLogin = async (e: React.FormEvent) => {
+  const handleReset = async (e: React.FormEvent) => {
     e.preventDefault();
     const email = userRef?.current?.value ?? ``;
-    const password = pwRef?.current?.value ?? ``;
-    login(email, password);
-
-    // TODO: validate fields before sending to the backend
-    //createSession(username, password);
+    createAccountRecovery(email);
   };
 
   return (
     <>
       {!isLoggedIn ? (
-        <AuthCard title="Login" onSubmit={handleLogin} buttonText="Login">
+        <AuthCard title="Login" onSubmit={handleReset} buttonText="Login">
           <input
             name="username"
             type="text"
@@ -43,17 +39,10 @@ const Login: NextPage = () => {
             className="input input-bordered input-accent w-full max-w-xs"
             ref={userRef}
           />
-          <input
-            name="password"
-            type="password"
-            placeholder="password"
-            className="input input-bordered input-accent w-full max-w-xs"
-            ref={pwRef}
-          />
         </AuthCard>
       ) : null}
     </>
   );
 };
 
-export default Login;
+export default ForgotPassword;
