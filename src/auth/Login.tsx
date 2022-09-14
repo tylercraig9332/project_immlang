@@ -36,27 +36,25 @@ const Login: NextPage = () => {
 
   return (
     <>
-      {!isLoggedIn ? (
-        <AuthCard title="Login" onSubmit={handleLogin} buttonText="Login">
-          <input
-            name="username"
-            type="text"
-            placeholder="email"
-            className="input input-bordered input-accent w-full max-w-xs"
-            ref={userRef}
-          />
-          <input
-            name="password"
-            type="password"
-            placeholder="password"
-            className="input input-bordered input-accent w-full max-w-xs"
-            ref={pwRef}
-          />
-          <Link href="forgot">
-            <a className="link">Forgot Password</a>
-          </Link>
-        </AuthCard>
-      ) : null}
+      <AuthCard title="Login" onSubmit={handleLogin} buttonText="Login">
+        <input
+          name="username"
+          type="text"
+          placeholder="email"
+          className="input input-bordered input-accent w-full max-w-xs"
+          ref={userRef}
+        />
+        <input
+          name="password"
+          type="password"
+          placeholder="password"
+          className="input input-bordered input-accent w-full max-w-xs"
+          ref={pwRef}
+        />
+        <Link href="forgot">
+          <a className="link">Forgot Password</a>
+        </Link>
+      </AuthCard>
     </>
   );
 };

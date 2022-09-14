@@ -30,20 +30,9 @@ const Nabvar = () => {
                   </Link>
 
                   <a className="text-gray-300 hover:bg-gray-700 hover:text-white mx-2 px-3 py-2 rounded-md text-sm font-medium">
-                    Team
+                    Test
                   </a>
 
-                  <a className="text-gray-300 hover:bg-gray-700 hover:text-white mx-2 px-3 py-2 rounded-md text-sm font-medium">
-                    Projects
-                  </a>
-
-                  <a className="text-gray-300 hover:bg-gray-700 hover:text-white mx-2 px-3 py-2 rounded-md text-sm font-medium">
-                    Calendar
-                  </a>
-
-                  <a className="text-gray-300 hover:bg-gray-700 hover:text-white mx-2 px-3 py-2 rounded-md text-sm font-medium">
-                    Reports
-                  </a>
                   {isLoggedIn ? (
                     <a
                       onClick={logout}
@@ -54,7 +43,7 @@ const Nabvar = () => {
                   ) : (
                     <>
                       <Link href="/login">
-                        <a className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium ml-[60%]">
+                        <a className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium ml-96">
                           Login
                         </a>
                       </Link>

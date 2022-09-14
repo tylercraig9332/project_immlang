@@ -1,5 +1,5 @@
 import type { NextPage } from "next";
-import AuthGuard from "api/AuthGuard";
+
 const Home: NextPage = () => {
   return (
     <div>

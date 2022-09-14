@@ -1,4 +1,4 @@
-import { useCallback, useMemo } from "react";
+import { useCallback, useEffect, useMemo } from "react";
 import { TokenState } from "./AuthProvider";
 import { createSession, deleteSession, createAccount } from "./account";
 import useAppStore from "store/appStore";
@@ -7,11 +7,17 @@ import { useRouter } from "next/router";
 //all auth verification goes in here
 const useAuth = (): TokenState => {
   const router = useRouter();
-  const { user, userObject, isLoggedIn } = useAppStore((state) => ({
-    user: state.user,
+  const { userObject, isLoggedIn } = useAppStore((state) => ({
     userObject: state.userObject,
     isLoggedIn: state.isLoggedIn,
   }));
+
+  useEffect(() => {
+    if (!isLoggedIn) {
+      return
+    }
+    isTokenExpired()
+  }, [])
 
   const login = useCallback((email: string, password: string) => {
     try {
@@ -20,12 +26,10 @@ const useAuth = (): TokenState => {
         userInfo.then((info) => {
           console.log(info);
           useAppStore.setState({ userObject: info, isLoggedIn: true });
-          //createToken().then((token) => console.log(token));
         })
       );
     } catch (error) {
       console.log(error);
-      //setAlert(error.message);
     }
   }, [])
 
@@ -41,7 +45,6 @@ const useAuth = (): TokenState => {
       })
     } catch (error) {
       console.log(error);
-      //setAlert(error.message);
     }
   }
 
@@ -52,16 +55,20 @@ const useAuth = (): TokenState => {
         userInfo.then((info) => {
           console.log(info);
           useAppStore.setState({ userObject: undefined, isLoggedIn: false });
-          //createToken().then((token) => console.log(token));
         })
       );
     } catch (error) {
       console.log(error);
-      //setAlert(error.message);
     }
   }
-  const checkTokenExpiration = () => {
-    return true
+
+  const isTokenExpired = () => {
+    if (userObject) {
+      if (userObject?.expire <= Math.round((new Date()).getTime() / 1000)) {
+        logout()
+      }
+      return
+    }
   }
 
   return useMemo(
@@ -69,9 +76,9 @@ const useAuth = (): TokenState => {
       login,
       signup,
       logout,
-      checkTokenExpiration
+      isTokenExpired
     }),
-    [login, signup, logout, checkTokenExpiration]
+    [login, signup, logout, isTokenExpired]
   )
 }
 

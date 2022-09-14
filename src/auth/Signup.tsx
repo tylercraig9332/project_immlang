@@ -1,9 +1,7 @@
 import type { NextPage } from "next";
 import React, { useRef, useState, useEffect } from "react";
 import AuthCard from "./components/AuthCard";
-import { createAccount } from "api";
 import Validators from "./Validators";
-import Link from "next/link";
 import useAppStore from "store/appStore";
 import { useRouter } from "next/router";
 import { useTokenContext } from "api/AuthProvider";
@@ -51,36 +49,34 @@ const Signup: NextPage = () => {
 
   return (
     <>
-      {!isLoggedIn ? (
-        <AuthCard
-          title="Create your account!"
-          onSubmit={handleSignup}
-          buttonText="Signup"
-          errorMessage={errorMessage}
-        >
-          <input
-            name="username"
-            type="text"
-            placeholder="email"
-            className="input input-bordered input-accent w-full max-w-xs"
-            ref={userRef}
-          />
-          <input
-            name="password"
-            type="password"
-            placeholder="password"
-            className="input input-bordered input-accent w-full max-w-xs"
-            ref={pwRef}
-          />
-          <input
-            name="passwordConf"
-            type="password"
-            placeholder="confirm password"
-            className="input input-bordered input-accent w-full max-w-xs"
-            ref={pwConfRef}
-          />
-        </AuthCard>
-      ) : null}
+      <AuthCard
+        title="Create your account!"
+        onSubmit={handleSignup}
+        buttonText="Signup"
+        errorMessage={errorMessage}
+      >
+        <input
+          name="username"
+          type="text"
+          placeholder="email"
+          className="input input-bordered input-accent w-full max-w-xs"
+          ref={userRef}
+        />
+        <input
+          name="password"
+          type="password"
+          placeholder="password"
+          className="input input-bordered input-accent w-full max-w-xs"
+          ref={pwRef}
+        />
+        <input
+          name="passwordConf"
+          type="password"
+          placeholder="confirm password"
+          className="input input-bordered input-accent w-full max-w-xs"
+          ref={pwConfRef}
+        />
+      </AuthCard>
     </>
   );
 };
