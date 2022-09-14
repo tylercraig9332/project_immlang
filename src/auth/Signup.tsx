@@ -6,6 +6,7 @@ import Validators from "./Validators";
 import Link from "next/link";
 import useAppStore from "store/appStore";
 import { useRouter } from "next/router";
+import { useTokenContext } from "api/AuthProvider";
 
 const Signup: NextPage = () => {
   const userRef = useRef<HTMLInputElement>(null);
@@ -13,6 +14,7 @@ const Signup: NextPage = () => {
   const pwConfRef = useRef<HTMLInputElement>(null);
   const [errorMessage, setErrorMessage] = useState<string>(``);
   const router = useRouter();
+  const { signup } = useTokenContext();
 
   const { isLoggedIn } = useAppStore((state) => ({
     isLoggedIn: state.isLoggedIn,
@@ -44,9 +46,7 @@ const Signup: NextPage = () => {
       setErrorMessage(`Passwords do not match`);
       return pwRef?.current?.focus();
     }
-
-    const response = createAccount(email, password);
-    console.log(response.then((info) => console.log(info)));
+    signup(email, password);
   };
 
   return (
@@ -79,9 +79,6 @@ const Signup: NextPage = () => {
             className="input input-bordered input-accent w-full max-w-xs"
             ref={pwConfRef}
           />
-          <Link href="forgot">
-            <a className="link">Forgot Password</a>
-          </Link>
         </AuthCard>
       ) : null}
     </>

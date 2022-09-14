@@ -4,6 +4,7 @@ import useAuth from "./useAuth";
 
 export interface TokenState {
   login: (email: string, password: string) => void;
+  signup: (email: string, password: string) => void;
   logout: () => void;
   checkTokenExpiration: () => void;
 }

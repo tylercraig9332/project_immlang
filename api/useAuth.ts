@@ -1,10 +1,12 @@
 import { useCallback, useMemo } from "react";
 import { TokenState } from "./AuthProvider";
-import { createSession, deleteSession } from "./account";
+import { createSession, deleteSession, createAccount } from "./account";
 import useAppStore from "store/appStore";
+import { useRouter } from "next/router";
+
 //all auth verification goes in here
 const useAuth = (): TokenState => {
-
+  const router = useRouter();
   const { user, userObject, isLoggedIn } = useAppStore((state) => ({
     user: state.user,
     userObject: state.userObject,
@@ -26,6 +28,22 @@ const useAuth = (): TokenState => {
       //setAlert(error.message);
     }
   }, [])
+
+  const signup = (email: string, password: string) => {
+    try {
+      createAccount(email, password).then((info) => {
+        console.log(info)
+        if (info?.$id) {
+          router.push({
+            pathname: "/login",
+          });
+        }
+      })
+    } catch (error) {
+      console.log(error);
+      //setAlert(error.message);
+    }
+  }
 
   const logout = () => {
     try {
@@ -49,10 +67,11 @@ const useAuth = (): TokenState => {
   return useMemo(
     () => ({
       login,
+      signup,
       logout,
       checkTokenExpiration
     }),
-    [login, logout, checkTokenExpiration]
+    [login, signup, logout, checkTokenExpiration]
   )
 }
 

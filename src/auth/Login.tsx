@@ -4,6 +4,7 @@ import AuthCard from "./components/AuthCard";
 import useAppStore from "store/appStore";
 import { useRouter } from "next/router";
 import { useTokenContext } from "api/AuthProvider";
+import Link from "next/link";
 
 const Login: NextPage = () => {
   const userRef = useRef<HTMLInputElement>(null);
@@ -51,6 +52,9 @@ const Login: NextPage = () => {
             className="input input-bordered input-accent w-full max-w-xs"
             ref={pwRef}
           />
+          <Link href="forgot">
+            <a className="link">Forgot Password</a>
+          </Link>
         </AuthCard>
       ) : null}
     </>

@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@headlessui/react": "^1.7.1",
     "@typescript-eslint/eslint-plugin": "^5.36.2",
     "appwrite": "^9.0.2",
     "autoprefixer": "^10.4.8",
