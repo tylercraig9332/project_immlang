@@ -1,4 +1,4 @@
-import { useTokenContext } from "api/AuthProvider";
+import { useTokenContext } from "src/auth/components/AuthProvider";
 import Link from "next/link";
 import useAppStore from "store/appStore";
 import { Transition } from "@headlessui/react";

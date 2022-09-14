@@ -3,7 +3,7 @@ import React, { useEffect, useRef } from "react";
 import AuthCard from "./components/AuthCard";
 import useAppStore from "store/appStore";
 import { useRouter } from "next/router";
-import { useTokenContext } from "api/AuthProvider";
+import { useTokenContext } from "src/auth/components/AuthProvider";
 import Link from "next/link";
 
 const Login: NextPage = () => {

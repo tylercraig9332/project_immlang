@@ -1,13 +1,7 @@
 import React, { FC, useContext } from "react";
 import { ChildrenProps } from "./AuthGuard";
-import useAuth from "./useAuth";
-
-export interface TokenState {
-  login: (email: string, password: string) => void;
-  signup: (email: string, password: string) => void;
-  logout: () => void;
-  isTokenExpired: () => void;
-}
+import useAuth from "../../../utils/hooks/useAuth";
+import { TokenState } from "utils/types";
 
 export const AuthContext = React.createContext<TokenState | undefined>(
   undefined

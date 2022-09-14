@@ -1,7 +1,7 @@
 import type { NextPage } from "next";
 import React, { useEffect, useRef } from "react";
 import AuthCard from "./components/AuthCard";
-import { createAccountRecovery } from "api";
+import { createAccountRecovery } from "src/auth";
 import useAppStore from "store/appStore";
 import { useRouter } from "next/router";
 

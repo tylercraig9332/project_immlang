@@ -4,7 +4,7 @@ import AuthCard from "./components/AuthCard";
 import Validators from "./Validators";
 import useAppStore from "store/appStore";
 import { useRouter } from "next/router";
-import { useTokenContext } from "api/AuthProvider";
+import { useTokenContext } from "src/auth/components/AuthProvider";
 
 const Signup: NextPage = () => {
   const userRef = useRef<HTMLInputElement>(null);

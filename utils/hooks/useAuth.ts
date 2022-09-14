@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo } from "react";
-import { TokenState } from "./AuthProvider";
-import { createSession, deleteSession, createAccount } from "./account";
+import { TokenState } from "utils/types";
+import { createSession, deleteSession, createAccount } from "../../src/auth/account";
 import useAppStore from "store/appStore";
 import { useRouter } from "next/router";
 
