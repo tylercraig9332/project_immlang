@@ -1,12 +1,12 @@
 import { useTokenContext } from "src/auth/components/AuthProvider";
 import Link from "next/link";
-import useAppStore from "store/appStore";
+import useUserStore from "store/userStore";
 import { Transition } from "@headlessui/react";
 import { useState } from "react";
 const Nabvar = () => {
   const { logout } = useTokenContext();
   const [isOpen, setIsOpen] = useState(false);
-  const { isLoggedIn } = useAppStore((state) => ({
+  const { isLoggedIn } = useUserStore((state) => ({
     isLoggedIn: state.isLoggedIn,
   }));
 

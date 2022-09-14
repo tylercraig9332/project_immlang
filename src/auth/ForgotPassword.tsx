@@ -2,14 +2,14 @@ import type { NextPage } from "next";
 import React, { useEffect, useRef } from "react";
 import AuthCard from "./components/AuthCard";
 import { createAccountRecovery } from "src/auth";
-import useAppStore from "store/appStore";
+import useUserStore from "store/userStore";
 import { useRouter } from "next/router";
 
 const ForgotPassword: NextPage = () => {
   const userRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
 
-  const { user, userObject, isLoggedIn } = useAppStore((state) => ({
+  const { user, userObject, isLoggedIn } = useUserStore((state) => ({
     user: state.user,
     userObject: state.userObject,
     isLoggedIn: state.isLoggedIn,

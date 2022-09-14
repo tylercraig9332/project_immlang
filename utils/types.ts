@@ -11,7 +11,7 @@ interface User {
     name: string;
 }
 
-export interface AppState {
+export interface UserState {
     user: User;
     isLoggedIn: boolean;
     userObject: UserObject | undefined;

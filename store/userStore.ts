@@ -1,11 +1,8 @@
-import { Client as Appwrite, Account, Databases } from "appwrite";
 import create from "zustand";
 import { devtools, persist } from "zustand/middleware";
+import { UserState, } from "utils/types";
 
-import { AppState, } from "utils/types";
-
-
-const useAppStore = create<AppState>()(
+const useUserStore = create<UserState>()(
   devtools(
     persist(
       (set) => ({
@@ -31,4 +28,4 @@ export const Server = {
   databaseID: process.env.APPWRITE_DATABASE_ID,
 };
 
-export default useAppStore
+export default useUserStore

@@ -2,7 +2,7 @@ import type { NextPage } from "next";
 import React, { useRef, useState, useEffect } from "react";
 import AuthCard from "./components/AuthCard";
 import Validators from "./Validators";
-import useAppStore from "store/appStore";
+import useUserStore from "store/userStore";
 import { useRouter } from "next/router";
 import { useTokenContext } from "src/auth/components/AuthProvider";
 
@@ -14,7 +14,7 @@ const Signup: NextPage = () => {
   const router = useRouter();
   const { signup } = useTokenContext();
 
-  const { isLoggedIn } = useAppStore((state) => ({
+  const { isLoggedIn } = useUserStore((state) => ({
     isLoggedIn: state.isLoggedIn,
   }));
 

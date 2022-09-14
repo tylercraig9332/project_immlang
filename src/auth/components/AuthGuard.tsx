@@ -1,12 +1,12 @@
 import { ReactNode, useEffect, useState } from "react";
 import UnauthenticatedPage from "src/Unauthenticated";
-import useAppStore from "store/appStore";
+import useUserStore from "store/userStore";
 export interface ChildrenProps {
   children: ReactNode;
 }
 
 const AuthGuard = ({ children }: ChildrenProps): JSX.Element => {
-  const { isLoggedIn } = useAppStore((state) => ({
+  const { isLoggedIn } = useUserStore((state) => ({
     isLoggedIn: state.isLoggedIn,
   }));
 

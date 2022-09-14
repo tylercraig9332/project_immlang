@@ -1,13 +1,13 @@
 import { useCallback, useEffect, useMemo } from "react";
 import { TokenState } from "utils/types";
 import { createSession, deleteSession, createAccount } from "../../src/auth/account";
-import useAppStore from "store/appStore";
+import useUserStore from "store/userStore";
 import { useRouter } from "next/router";
 
 //all auth verification goes in here
 const useAuth = (): TokenState => {
   const router = useRouter();
-  const { userObject, isLoggedIn } = useAppStore((state) => ({
+  const { userObject, isLoggedIn } = useUserStore((state) => ({
     userObject: state.userObject,
     isLoggedIn: state.isLoggedIn,
   }));
@@ -25,7 +25,7 @@ const useAuth = (): TokenState => {
       console.log(
         userInfo.then((info) => {
           console.log(info);
-          useAppStore.setState({ userObject: info, isLoggedIn: true });
+          useUserStore.setState({ userObject: info, isLoggedIn: true });
         })
       );
     } catch (error) {
@@ -54,7 +54,7 @@ const useAuth = (): TokenState => {
       console.log(
         userInfo.then((info) => {
           console.log(info);
-          useAppStore.setState({ userObject: undefined, isLoggedIn: false });
+          useUserStore.setState({ userObject: undefined, isLoggedIn: false });
         })
       );
     } catch (error) {
