@@ -1,17 +1,20 @@
+import type { AppProps } from "next/app";
+import dynamic from "next/dynamic";
+import "styles/globals.css";
+const Navbar = dynamic(() => import("src/nav/Navbar"), { ssr: false });
+import { AuthProvider } from "src/auth/components/AuthProvider";
 
-import type { AppProps } from 'next/app'
-import 'styles/globals.css'
-import Navbar from 'src/nav/Navbar'
-
-function MyApp({ Component, pageProps }: AppProps ) {
+function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <div data-theme="immlangTheme">
-      <Navbar />
-      <div className="max-w-7xl my-10 mx-auto">
-        <Component {...pageProps} />
+    <AuthProvider>
+      <div data-theme="immlangTheme">
+        <Navbar />
+        <div className="max-w-7xl my-20 mx-auto">
+          <Component {...pageProps} />
+        </div>
       </div>
-    </div>
-  )
+    </AuthProvider>
+  );
 }
 
-export default MyApp
+export default MyApp;

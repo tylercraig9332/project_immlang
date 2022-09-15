@@ -1,94 +1,161 @@
-import Link from 'next/link'
-
+import { useTokenContext } from "src/auth/components/AuthProvider";
+import Link from "next/link";
+import useUserStore from "store/userStore";
+import { Transition } from "@headlessui/react";
+import { useState } from "react";
 const Nabvar = () => {
-
+  const { logout } = useTokenContext();
+  const [isOpen, setIsOpen] = useState(false);
+  const { isLoggedIn } = useUserStore((state) => ({
+    isLoggedIn: state.isLoggedIn,
+  }));
 
   return (
     <>
-      <div data-theme="immlangTheme" className="navbar bg-base-100">
-        <div className="navbar-start max-w-25 w-25 m-0">
-          <div className="dropdown">
-            <label tabIndex={0} className="btn btn-ghost lg:hidden">
-              <svg
-                xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none"
-                viewBox="0 0 24 24" stroke="currentColor"
+      <nav className="bg-gray-800 fixed w-full top-0 overflow-y-clip">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-16">
+            <div className="flex items-center">
+              <div className="flex-shrink-0">
+                <Link href="/">
+                  <a className="btn btn-ghost normal-case text-xl mx-2">{`ImmLang`}</a>
+                </Link>
+              </div>
+              <div className="hidden md:block">
+                <div className="ml-10 flex">
+                  <Link href="/">
+                    <a className=" hover:bg-gray-700 text-white mx-2 px-3 py-2 rounded-md text-sm font-medium">
+                      Home
+                    </a>
+                  </Link>
+
+                  <a className="text-gray-300 hover:bg-gray-700 hover:text-white mx-2 px-3 py-2 rounded-md text-sm font-medium">
+                    Test
+                  </a>
+
+                  {isLoggedIn ? (
+                    <a
+                      onClick={logout}
+                      className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium ml-[60%]"
+                    >
+                      Logout
+                    </a>
+                  ) : (
+                    <>
+                      <Link href="/login">
+                        <a className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium ml-96">
+                          Login
+                        </a>
+                      </Link>
+                      <Link href="/signup">
+                        <a className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium mx-1">
+                          SignUp
+                        </a>
+                      </Link>
+                    </>
+                  )}
+                </div>
+              </div>
+            </div>
+            <div className="-mr-2 flex md:hidden">
+              <button
+                onClick={() => setIsOpen(!isOpen)}
+                type="button"
+                className="bg-gray-900 inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
+                aria-controls="mobile-menu"
+                aria-expanded="false"
               >
-                <path
-                  strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
-                  d="M4 6h16M4 12h8m-8 6h16"
-                />
-              </svg>
-            </label>
-            <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
-              <li><a>{`Item 1`}</a></li>
-              <li tabIndex={0}>
-                <a className="justify-between">
-                  {`Parent`}
+                <span className="sr-only">Open main menu</span>
+                {!isOpen ? (
                   <svg
-                    className="fill-current" xmlns="http://www.w3.org/2000/svg" width="24"
-                    height="24" viewBox="0 0 24 24"
-                  ><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+                    className="block h-6 w-6"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    aria-hidden="true"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M4 6h16M4 12h16M4 18h16"
+                    />
+                  </svg>
+                ) : (
+                  <svg
+                    className="block h-6 w-6"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    aria-hidden="true"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M6 18L18 6M6 6l12 12"
+                    />
+                  </svg>
+                )}
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <Transition
+          show={isOpen}
+          enter="transition ease-out duration-100 transform"
+          enterFrom="opacity-0 scale-95"
+          enterTo="opacity-100 scale-100"
+          leave="transition ease-in duration-75 transform"
+          leaveFrom="opacity-100 scale-100"
+          leaveTo="opacity-0 scale-95"
+        >
+          {(ref) => (
+            <div className="md:hidden" id="mobile-menu">
+              <div ref={ref} className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <Link href="/">
+                  <a className="hover:bg-gray-700 text-white block px-3 py-2 rounded-md text-base font-medium">
+                    Dashboard
+                  </a>
+                </Link>
+
+                <a
+                  href="#"
+                  className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+                >
+                  Team
                 </a>
-                <ul className="p-2">
-                  <li><a>{`Submenu 1`}</a></li>
-                  <li><a>{`Submenu 2`}</a></li>
-                </ul>
-              </li>
-              <li><a>{`Item 3`}</a></li>
-            </ul>
-          </div>
-          <Link href="/">
-            <a className="btn btn-ghost normal-case text-xl mx-2">{`ImmLang`}</a>
-          </Link>
 
-        </div>
-        <div className="navbar mr-25 w-1/4 hidden lg:flex">
-          <ul className="menu menu-horizontal p-0">
-            <li>
-              <Link href="/login">
-                <a>{`Login`}</a>
-              </Link>
-            </li>
-            <li>
-              <Link href="/signup">
-                <a>{`Sign Up`}</a>
-              </Link>
-            </li>
-            <li tabIndex={0}>
-              <a>
-                {`Parent`}
-                <svg
-                  className="fill-current" xmlns="http://www.w3.org/2000/svg" width="20"
-                  height="20" viewBox="0 0 24 24"
-                ><path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" /></svg>
-              </a>
-              <ul className="p-2">
-                <li><a>{`Submenu 1`}</a></li>
-                <li><a>{`Submenu 2`}</a></li>
-              </ul>
-            </li>
-            <li><a>{`Item 3`}</a></li>
-          </ul>
-        </div>
-        <div className="dropdown dropdown-end">
-          <div className="w-100 mx-1/2 rounded-full">
-            <button className="btn btn-accent">{`test`}</button>
-          </div>
-          <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
-            <li>
-              <a className="justify-between">
-                {`Profile`}
-                <span className="badge">{`New`}</span>
-              </a>
-            </li>
-            <li><a>{`Settings`}</a></li>
-            <li><a>{`Logout`}</a></li>
-          </ul>
-        </div>
+                <a
+                  href="#"
+                  className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+                >
+                  Projects
+                </a>
 
-      </div>
+                <a
+                  href="#"
+                  className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+                >
+                  Calendar
+                </a>
+
+                <a
+                  href="#"
+                  className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+                >
+                  Reports
+                </a>
+              </div>
+            </div>
+          )}
+        </Transition>
+      </nav>
     </>
-  )
-}
+  );
+};
 
-export default Nabvar
+export default Nabvar;
