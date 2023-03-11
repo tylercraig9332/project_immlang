@@ -11,15 +11,35 @@ module.exports = {
     themes: [
       {
         immlangTheme: {
-          primary: `#157dec`,
-          "secondary": `#9ca3af`,
-          "accent": `#8b5cf6`,
-          "neutral": `#111827`,
+          "primary": `#157dec`,
+          "primary-content": `#FFFFFF`,
+          "secondary": `#F9F9F9`, // `#BDA0BC`, // `#C08497`, // `#EFF1F3`, // - nice white
+          "accent": `#D4B483`,
+          "neutral": `#c084fc`,
+          "neutral-content": `#FFFFFF`,
           "base-100": `#2A303C`,
-          "info": `#9333ea`,
-          "success": `#4aa02c`,
+          "base-content": `#FFFFFF`,
+          "info": `#BDA0BC`, // `#F9F9F9`, // `#9333ea`,
+          "success": `#00CC99`,
           "warning": `#ff8040`,
-          "error": `#c24641`
+          "error": `#c24641`,
+          "error-content": `#FFFFFF`
+        },
+        immlangThemeLight: {
+          "primary": `#157dec`,
+          "primary-content": `#FFFFFF`,
+          "secondary": `#D4B483`, // `#454545`, // #9ca3af`,
+          "accent": `#D8DDEF`,
+          "neutral": `#c084fc`,
+          "neutral-content": `#FFFFFF`,
+          "base-100": `#EFF1F3`,
+          "info": `#BDA0BC`, // `#9333ea`,
+          "success": `#00CC99`,
+          "success-content": `#FFFFFF`,
+          "warning": `#ff8040`,
+          "warning-content": `#FFFFFF`,
+          "error": `#c24641`,
+          "error-content": `#FFFFFF`
         }
       },
       `dark`

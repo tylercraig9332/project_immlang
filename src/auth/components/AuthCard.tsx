@@ -12,7 +12,7 @@ const AuthCard = ({title, buttonText, errorMessage, onSubmit, children} : AuthCa
           <div className="flex flex-col gap-3">{children}</div>
           <ErrorAlert errorMessage={errorMessage}></ErrorAlert>
           <div className="card-actions justify-center my-2">
-            <button className="btn" type="submit">{buttonText}</button>
+            <button className="btn btn-secondary" type="submit">{buttonText}</button>
           </div>
         </div>
       </div>
