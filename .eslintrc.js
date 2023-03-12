@@ -224,10 +224,6 @@ module.exports = {
       `always`
     ],
     "wrap-regex": `error`,
-    "arrow-body-style": [
-      `error`,
-      `always`
-    ],
     "arrow-spacing": `error`,
     "no-duplicate-imports": `error`,
     "no-var": `error`,
